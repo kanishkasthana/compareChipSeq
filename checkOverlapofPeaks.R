@@ -1,7 +1,7 @@
 #Script Written by Kanishk Asthana kasthana@eng.ucsd.edu
 require('intervals')
-macsData=read.table('mm10-C57BL7-ThioMac-PU1-notx.bsites.PeaksOnly.txt', header=TRUE)
-homerData=read.table('homerPeaksOnly.txt', header=TRUE )
+macsData=read.csv('macsEncodePeaks.csv')
+homerData=read.table('homerEncodePeaksOnly.txt', header=TRUE )
 
 #Sorting for better comparison of column numbers
 homerData=homerData[order(homerData$chr),]
@@ -47,18 +47,18 @@ chr_values_mat=sapply(chromosomes, function(chr_name){
 #Labelling Comparison Data frame
 homerVsMacs=data.frame(t(chr_values_mat));
 homerVsMacs=cbind(homerVsMacs,chromosomes);
-colnames(homerVsMacs)<-c("Number of SISSRS peaks", "Number of Homer Peaks", "Shared Peaks","Chromosome Number")
+colnames(homerVsMacs)<-c("Number of MACs peaks", "Number of Homer Peaks", "Shared Peaks","Chromosome Number")
 
 require('xtable')
-sink("HomerVSSISSRS.html")
+sink("HomerVSMacsEncode_DataSet.html")
 
 print(xtable(homerVsMacs),type="html")
 
 #Total Values for data
 total_sums=apply(chr_values_mat,1,sum)
-print("<br>Percentage of Peaks in SISSRS shared with HOMER:<br>")
+print("<br>Percentage of Peaks in MACS shared with HOMER:<br>")
 print(100*total_sums[3]/total_sums[1])
-print("<br>Percentage of Peaks in HOMER shared with SISSRS:<br>")
+print("<br>Percentage of Peaks in HOMER shared with MACS:<br>")
 print(100*total_sums[3]/total_sums[2])
 
 
