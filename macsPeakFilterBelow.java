@@ -8,7 +8,7 @@
 import java.io.*;
 import java.util.*;
 
-public class macsPeakFilter {
+public class macsPeakFilterBelow {
 
     /**
      * @param args the command line arguments
@@ -159,7 +159,7 @@ public class macsPeakFilter {
             System.out.println(sortedScores.get(0));
             
             for(int i=0;i<scores.size();i++){
-                if(scores.get(i)>cutOffScore){
+                if(scores.get(i)<cutOffScore){
                     out.println(mainData.get(i));
                 }
             }

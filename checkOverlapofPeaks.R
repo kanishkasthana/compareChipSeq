@@ -1,7 +1,7 @@
 #Script Written by Kanishk Asthana kasthana@eng.ucsd.edu
 require('intervals')
-macsData=read.table('macsEncodePeaks_Filtered.txt', header=TRUE)
-homerData=read.table('homerEncodePeaks_Filtered.txt', header=TRUE )
+macsData=read.table('macs2Out_peaks_FilteredBelow.txt', header=TRUE)
+homerData=read.table('homerPeaksFilteredBelow.txt', header=TRUE )
 
 #Sorting for better comparison of column numbers
 homerData=homerData[order(homerData$chr),]
@@ -50,7 +50,7 @@ homerVsMacs=cbind(homerVsMacs,chromosomes);
 colnames(homerVsMacs)<-c("Number of MACs peaks", "Number of Homer Peaks", "Shared Peaks","Chromosome Number")
 
 require('xtable')
-sink("HomerVSMacs_Encode_Filtered.html")
+sink("HomerVSMacsFilteredBelow.html")
 
 print(xtable(homerVsMacs),type="html")
 
