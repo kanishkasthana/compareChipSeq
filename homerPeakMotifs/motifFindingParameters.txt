@@ -1,0 +1,1 @@
+cmd = homerPeaks.txt mm10 homerPeakMotifs
