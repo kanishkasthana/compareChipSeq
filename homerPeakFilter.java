@@ -119,7 +119,7 @@ public class homerPeakFilter {
             for(String data:mainData){
                 StringTokenizer dataElements=new StringTokenizer(data);
                 //Score is stored in the 9th Token parsing through first 8 Tokens
-                for(int i=0;i<8;i++){
+                for(int i=0;i<7;i++){
                     dataElements.nextToken();
                 }
                 double score=Double.parseDouble(dataElements.nextToken());

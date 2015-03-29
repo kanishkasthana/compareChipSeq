@@ -1,7 +1,9 @@
 #Script Written by Kanishk Asthana kasthana@eng.ucsd.edu
 require('intervals')
-macsData=read.table('macs2Out_peaks_FilteredBelow.txt', header=TRUE)
-homerData=read.table('homerPeaksFilteredBelow.txt', header=TRUE )
+macsData=read.table('GABP_peaks_Filtered.xls',comment.char="#",header=TRUE);
+homerData=read.table('homerGABPPeaksFiltered.txt',comment.char="#", blank.lines.skip=TRUE);
+names(homerData)<-c("PeakID","chr","start","end","strand","Normalized_Tag_Count","focus_ratio","findPeaks_Score","Fold_ChangevsLocal","p-valuevsLocal","ClonalFoldChange")
+
 
 #Sorting for better comparison of column numbers
 homerData=homerData[order(homerData$chr),]
@@ -50,7 +52,7 @@ homerVsMacs=cbind(homerVsMacs,chromosomes);
 colnames(homerVsMacs)<-c("Number of MACs peaks", "Number of Homer Peaks", "Shared Peaks","Chromosome Number")
 
 require('xtable')
-sink("HomerVSMacsFilteredBelow.html")
+sink("HomerVSMacsGABP_Filtered.html")
 
 print(xtable(homerVsMacs),type="html")
 

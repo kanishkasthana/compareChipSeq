@@ -34,12 +34,7 @@ if(length(chromosomes_homer)<length(chromosomes_macs)){
   #Creatging Interval objects for start and end values computed using both homer and macs
   homer_interval=Intervals(homer_chromosome_matrix);
   macs_interval=Intervals(macs_chromosome_matrix);
-  
-  #Storing the number of values that are common for each chromosome
-  #NOTE: Hope this is an efficient implementation or else it can take a long time and will have to implement interval trees in 
-  #Java
-  homer_overlapping_row_numbers=interval_overlap(homer_interval,macs_interval);
-  
 
+  homer_overlapping_row_numbers=interval_overlap(homer_interval,macs_interval);
   
 });
