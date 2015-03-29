@@ -1,12 +1,12 @@
 #Script Written By Kanishk Asthana
 require('intervals');
-qPCRData=read.table("gabp_qPCR_hg19.bed");
+qPCRData=read.table("NRSF_qPCR_hg19.bed");
 names(qPCRData)<-c("chr","start","end");
 
 qPCR_matrix=as.matrix(cbind(qPCRData$start,qPCRData$end))
 qPCR_interval=Intervals(qPCR_matrix);
-macsData=read.table('GABP_peaks.xls',comment.char="#",header=TRUE);
-homerData=read.table('homerGABPPeaks.txt',comment.char="#", blank.lines.skip=TRUE);
+macsData=read.table('macs2NRSF_peaks.xls',comment.char="#",header=TRUE);
+homerData=read.table('homerNRSFPeaks.txt',comment.char="#", blank.lines.skip=TRUE);
 names(homerData)<-c("PeakID","chr","start","end","strand","Normalized_Tag_Count","focus_ratio","findPeaks_Score","Fold_ChangevsLocal","p-valuevsLocal","ClonalFoldChange")
 
 
@@ -30,7 +30,7 @@ if(length(chromosomes_homer)<length(chromosomes_macs)){
 homerPeaksInOrder=order(-homerData$findPeaks_Score);
 #print(length(homerPeaksInOrder))
 #getting array for number of qPCR detected sites 
-range=20000
+range=10000
 
 qPCRPositives=sapply(seq(1,range,by=250),function(peakNumber)
 {
@@ -62,8 +62,8 @@ return(sum(chr_values_mat));
 
 });
 
-plot(seq(1,range,by=250),qPCRPositives,type='o',col="green",xlab="Peak Rank",ylab="Number of qPCR Positives Detected")
-title(main="Comparison of Homer vs Macs in detecting qPCR verified positives for GABP")
+plot(seq(1,range,by=250),qPCRPositives/78,type='o',col="green",xlab="Peak Rank",ylab="Fraction of qPCR Positives Detected")
+title(main="Comparison of Homer vs Macs in detecting qPCR verified positives for NRSF")
 
 macsPeaksInOrder=order(-macsData$X.log10.pvalue.)
 
@@ -96,4 +96,5 @@ return(sum(chr_values_mat));
 
 });
 
-lines(seq(1,range,by=250),qPCRPositives,type='o',col="red");
+lines(seq(1,range,by=250),qPCRPositives/79,type='o',col="red");
+legend("bottomright", c("Homer","Macs"), cex=0.8, fill=c("Green","Red")) 
