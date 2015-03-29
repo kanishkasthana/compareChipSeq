@@ -1,7 +1,7 @@
 #Script Written by Kanishk Asthana kasthana@eng.ucsd.edu
 require('intervals')
-macsData=read.table('GABP_peaks_Filtered.xls',comment.char="#",header=TRUE);
-homerData=read.table('homerGABPPeaksFiltered.txt',comment.char="#", blank.lines.skip=TRUE);
+macsData=read.table('GABP_peaks_FilteredNumeric.xls',comment.char="#",header=TRUE);
+homerData=read.table('homerGABPPeaksFilteredNumeric.txt',comment.char="#", blank.lines.skip=TRUE);
 names(homerData)<-c("PeakID","chr","start","end","strand","Normalized_Tag_Count","focus_ratio","findPeaks_Score","Fold_ChangevsLocal","p-valuevsLocal","ClonalFoldChange")
 
 
@@ -20,6 +20,7 @@ chromosomes=chromosomes_homer
 if(length(chromosomes_homer)<length(chromosomes_macs)){
   chromosomes=chromosomes_macs
 }
+
 
 chr_values_mat=sapply(chromosomes, function(chr_name){
   chr_name=as.character(chr_name)
@@ -52,7 +53,8 @@ homerVsMacs=cbind(homerVsMacs,chromosomes);
 colnames(homerVsMacs)<-c("Number of MACs peaks", "Number of Homer Peaks", "Shared Peaks","Chromosome Number")
 
 require('xtable')
-sink("HomerVSMacsGABP_Filtered.html")
+
+sink("HomerVSMacsGABP_FilteredNumeric.html")
 
 print(xtable(homerVsMacs),type="html")
 
@@ -62,5 +64,4 @@ print("<br>Percentage of Peaks in MACS shared with HOMER:<br>")
 print(100*total_sums[3]/total_sums[1])
 print("<br>Percentage of Peaks in HOMER shared with MACS:<br>")
 print(100*total_sums[3]/total_sums[2])
-
 
