@@ -1,7 +1,7 @@
 #Script Written by Kanishk Asthana kasthana@eng.ucsd.edu
 require('intervals')
-macsData=read.table('macs2Out_peaks.xls',comment.char="#",header=TRUE);
-homerData=read.table("homerPeaks.txt",comment.char="#", blank.lines.skip=TRUE);
+macsData=read.table('macs2Out_peaks_FilteredBelow.xls',comment.char="#",header=TRUE);
+homerData=read.table("homerPeaksFilteredBelow.txt",comment.char="#", blank.lines.skip=TRUE);
 names(homerData)<-c("PeakID","chr","start","end","strand","Normalized_Tag_Count","focus_ratio","findPeaks_Score","Fold_ChangevsLocal","p-valuevsLocal","ClonalFoldChange")
 
 
@@ -54,7 +54,7 @@ colnames(homerVsMacs)<-c("Number of MACs peaks", "Number of Homer Peaks", "Share
 
 require('xtable')
 
-#sink("HomerVSMacsGABP_FilteredNumeric.html")
+sink("HomerVSMacs_FilteredBelow.html")
 
 print(xtable(homerVsMacs),type="html")
 
