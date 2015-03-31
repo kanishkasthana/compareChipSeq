@@ -1,0 +1,1 @@
+cmd = macsData.bed mm10 macsPeaksMotifs
